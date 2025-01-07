@@ -1,0 +1,1 @@
+The following directory contains the scr1 core Verilog files, which ARE ALL MODIFIED AND DIFFER FROM THE ORIGINAL files (https://github.com/syntacore/scr1). Specifically, the original core is written in SystemVerilog, and these files are a result of translating SystemVerilog source files into Verilog using a tool called sv2v (https://github.com/zachjs/sv2v)

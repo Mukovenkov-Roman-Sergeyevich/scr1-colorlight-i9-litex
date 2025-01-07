@@ -1,0 +1,2 @@
+graft pythondata_cpu_scr1/verilog/
+global-exclude *.py[cod]
