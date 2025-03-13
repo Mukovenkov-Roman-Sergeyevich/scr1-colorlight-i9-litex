@@ -11,10 +11,10 @@ CPU_VARIANTS = {
     "full": "SCR1_Full"
 }
 GCC_FLAGS = {
-    "full": "-march=rv32i2p0_mc -mabi=ilp32",
+    "full": "-march=rv32imc_zicsr -mabi=ilp32",
 }
 
-class SCR1(CPU, AutoCSR):
+class SCR1(CPU):
     family = "riscv"
     category = "softcore"
     name = "scr1"
@@ -29,6 +29,7 @@ class SCR1(CPU, AutoCSR):
     @property
     def gcc_flags(self):
         flags = GCC_FLAGS[self.variant]
+        flags += " -D__scr1__"
         return flags
     def __init__(self, platform, variant="full"):
         self.platform = platform
