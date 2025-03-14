@@ -58,11 +58,12 @@ extern "C" {
 #define IPIC_VOID_VEC 16
 
 #define PLF_IPIC_STATIC_LINE_MAPPING 0
-#define PLF_IPIC_IRQ_LN_NUM (2)
-#define PLF_IPIC_IRQ_VEC_NUM 2
-#define IPIC_IRQ_LN_VOID 2
+#define PLF_IPIC_IRQ_LN_NUM (1)
+#define PLF_IPIC_IRQ_VEC_NUM 1
+#define IPIC_IRQ_LN_VOID 1
 
 #define MK_IRQ_CFG(line, mode, flags) ((mode) | (flags) | ((line) << IPIC_IRQ_LN_OFFS))
+
 
 static void ipic_irq_enable(unsigned irq_vec);
 
@@ -108,43 +109,29 @@ static inline void irq_setie(unsigned int ie)
         csrc(mstatus, CSR_MSTATUS_MIE);
 }
 
-static inline unsigned int irq_getmask(void)
+static inline unsigned int irq_getmask(void)  // unused
 {
-    unsigned int mask;
-    asm volatile ("csrr %0, %1" : "=r"(mask) : "i"(CSR_IRQ_MASK));
-    return mask;
+    return 0;
 }
 
-static inline void irq_setmask(unsigned int mask)
+static inline void irq_setmask(unsigned int mask)  // unused
 {
-    asm volatile ("csrw %0, %1" :: "i"(CSR_IRQ_MASK), "r"(mask));
+    return;
 }
 
-static inline unsigned int irq_pending(void)
+static inline unsigned int irq_pending(void)  // unused
 {
-    unsigned int pending;
-    asm volatile ("csrr %0, %1" : "=r"(pending) : "i"(CSR_IRQ_PENDING));
-    return pending;
+    return 0;
 }
 
-static void irq_enable(unsigned int irq) {
-    if (irq >= 16) {
-        return;
-    }
-
-    __asm__ volatile ("csrrs %0, mie, %1\n"
-                      : "=r" (mie)
-                      : "r" (1 << irq));
-}
-
-void ipic_irq_enable(unsigned irq_vec)
+void ipic_irq_enable(unsigned irq_vec)  // unused
 {
     csr_write(IPIC_IDX, irq_vec);
     const unsigned long state = (csr_read(IPIC_ICSR) & ~IPIC_IRQ_PENDING) | IPIC_IRQ_ENABLE;
     csr_write(IPIC_ICSR, state);
 }
 
-void ipic_irq_disable(unsigned irq_vec)
+void ipic_irq_disable(unsigned irq_vec)  // unused
 {
     csr_write(IPIC_IDX, irq_vec);
     const unsigned long state = csr_read(IPIC_ICSR) & ~(IPIC_IRQ_ENABLE | IPIC_IRQ_PENDING);
@@ -170,7 +157,7 @@ static int ipic_irq_setup(int irq_vec, int line, int mode, int flags) {
     return irq_vec;
 }
 
-static void ipic_irq_reset(int irq_vec)
+static void ipic_irq_reset(int irq_vec)  // unused
 {
     ipic_irq_setup(irq_vec, IPIC_IRQ_LN_VOID, IPIC_IRQ_PRIV_MMODE, IPIC_IRQ_CLEAR_PENDING);
 }

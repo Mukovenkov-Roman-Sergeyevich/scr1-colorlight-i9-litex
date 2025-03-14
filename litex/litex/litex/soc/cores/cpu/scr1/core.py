@@ -150,7 +150,8 @@ class SCR1(CPU):
             "main_ram": 0x1000_0000,
             "csr": 0xff00_0000,
             "rom": 0xfffc_0000,
-            "sram": 0xffff_e000
+            "sram": 0xffff_e000,
+            "tcm": 0xf0000_0000
         }
     @staticmethod
     def add_sources(platform):

@@ -225,7 +225,7 @@ void isr(void) {
     if (vector < CONFIG_CPU_INTERRUPTS && irq_table[vector].isr) {
         irq_table[vector].isr();
     } else {
-        printf("IRQ vector in the IRQ table");
+        printf("IRQ vector not in the IRQ table");
         return;
     }
     ipic_eoi();

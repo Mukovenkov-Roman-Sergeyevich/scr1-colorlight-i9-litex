@@ -193,12 +193,16 @@ static void console_service(void)
 
 int main(void)
 {
-	uart_init();    // <-- To here
+#ifdef __scr1__
+	uart_init();
+#endif
 #ifdef CONFIG_CPU_HAS_INTERRUPT
 	irq_setmask(0);
 	irq_setie(1);
 #endif
-                    // <-- From here
+#ifndef __scr1__
+	uart_init();
+#endif
 	help();
 	prompt();
 

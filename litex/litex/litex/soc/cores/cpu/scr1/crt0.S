@@ -33,7 +33,6 @@ trap_entry:
     sw   x30, 14*4(sp)
     sw   x31, 15*4(sp)
     call isr
-    # Restore registers
     lw   x1,  0*4(sp)
     lw   x5,  1*4(sp)
     lw   x6,  2*4(sp)
@@ -85,8 +84,6 @@ bss_done:
     call scr_ipic_init
     li a0, 0x800  # No timer
     csrw mie, a0
-    li a0, 0x1880
-    csrw mstatus,a0
     call main
 infinit_loop:
     j infinit_loop
