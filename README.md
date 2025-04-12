@@ -84,8 +84,8 @@ The integration was tested with open-source FPGA synthesis and place-and-route t
 *   Perform timing analysis to identify specific critical paths.
 *   Investigate using LiteX's native AXI interconnect support to potentially mitigate bridge overhead.
 *   Implement support for timer interrupts and other system features.
-*   Refine and potentially upstream the IPIC handler support within LiteX.
-*   **Implement support for JTAG debugger** <---- Requested Feature
+*   Refine and potentially upstream the IPIC handler and SCR1 support within LiteX.
+*   Implement support for JTAG debugger.
   
 ## Licensing
 
